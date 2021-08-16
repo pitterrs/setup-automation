@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZMA0_SETAUT_STEP</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZMA0_SETAUT_STEP</DOMNAME>
+    <HEADLEN>05</HEADLEN>
+    <SCRLEN1>05</SCRLEN1>
+    <SCRLEN2>05</SCRLEN2>
+    <SCRLEN3>05</SCRLEN3>
+    <DDTEXT>Steps</DDTEXT>
+    <REPTEXT>Steps</REPTEXT>
+    <SCRTEXT_S>Steps</SCRTEXT_S>
+    <SCRTEXT_M>Steps</SCRTEXT_M>
+    <SCRTEXT_L>Steps</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>P</LANGU>
+    <LANGU>S</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>P</DDLANGUAGE>
+     <DDTEXT>Etapas</DDTEXT>
+     <REPTEXT>Etapa</REPTEXT>
+     <SCRTEXT_S>Etapa</SCRTEXT_S>
+     <SCRTEXT_M>Etapa</SCRTEXT_M>
+     <SCRTEXT_L>Etapa</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>S</DDLANGUAGE>
+     <DDTEXT>Pasos</DDTEXT>
+     <REPTEXT>Pasos</REPTEXT>
+     <SCRTEXT_S>Pasos</SCRTEXT_S>
+     <SCRTEXT_M>Pasos</SCRTEXT_M>
+     <SCRTEXT_L>Pasos</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
