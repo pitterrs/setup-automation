@@ -35,7 +35,7 @@ CLASS lcl_stock_t_data_dao IMPLEMENTATION.
             lfart2
             lfcon
             atpconfmrp
-        FROM t161v
+        FROM ZMA0V_CDS_STD
         INTO TABLE re_result
         WHERE reswk IN im_plants
         AND bstyp <> space.

@@ -2,6 +2,7 @@
 *   System-defined Include-files.                                 *
 *******************************************************************
   INCLUDE LZMA0_SETAUT_STDTOP.               " Global Data
+  INCLUDE LZMA0_SETAUT_STDCLS.
   INCLUDE LZMA0_SETAUT_STDUXX.               " Function Modules
 
 *******************************************************************

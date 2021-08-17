@@ -2,6 +2,7 @@
 *   System-defined Include-files.                                 *
 *******************************************************************
   INCLUDE LZMM_SETAUT_PSATOP.                " Global Data
+  INCLUDE LZMM_SETAUT_PSACLS.
   INCLUDE LZMM_SETAUT_PSAUXX.                " Function Modules
 
 *******************************************************************

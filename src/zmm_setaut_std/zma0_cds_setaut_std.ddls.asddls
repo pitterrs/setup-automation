@@ -16,4 +16,4 @@ as select from t161v {
     lfart2,
     lfcon,
     atpconfmrp
-}
+} 

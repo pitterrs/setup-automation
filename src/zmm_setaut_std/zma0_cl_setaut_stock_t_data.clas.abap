@@ -5,6 +5,13 @@ class ZMA0_CL_SETAUT_STOCK_T_DATA definition
 
 public section.
 
+    TYPES: tty_STOCK_T_DATA2 TYPE TABLE OF ZMA0V_CDS_STD
+           WITH DEFAULT KEY.
+
+*    TYPES: tty_STOCK_T_DATA TYPE SORTED TABLE OF ZMA0V_CDS_STD
+*      WITH NON-UNIQUE KEY primary_key COMPONENTS bstyp reswk
+*      WITH UNIQUE SORTED KEY secondary_key COMPONENTS bstyp bsart reswk.
+
   interfaces ZMA0_IF_SETAUT_PROCESS .
 
   types:
@@ -55,6 +62,15 @@ public section.
   methods SET_REQUEST
     importing
       value(IM_REQUEST) type ref to ZMA0_CL_SETAUT_REQUEST .
+
+  METHODS get_reference_data
+      RETURNING VALUE(re_reference_data) TYPE
+                  zma0_cl_setaut_stock_t_data=>tt_stock_t_data.
+
+  METHODS set_reference_data
+      IMPORTING VALUE(im_reference_data) TYPE
+                  zma0_cl_setaut_stock_t_data=>tt_stock_t_data.
+
   PRIVATE SECTION.
 
     DATA new_plant    TYPE zma0_setaut_nplant.
@@ -62,6 +78,8 @@ public section.
     DATA request      TYPE REF TO zma0_cl_setaut_request.
     DATA database     TYPE REF TO lcl_stock_t_data_dao.
     DATA batch_inputs TYPE lif_stock_t_data=>tt_batch_input.
+    DATA reference_data
+         TYPE zma0_cl_setaut_stock_t_data=>tt_stock_t_data.
 
     METHODS get_registers_to_be_copied
       IMPORTING
@@ -102,7 +120,7 @@ CLASS ZMA0_CL_SETAUT_STOCK_T_DATA IMPLEMENTATION.
         )
     ).
 
-    me->batch_inputs = me->create_batch_inputs( ).
+    me->reference_data = me->database->get_stock_t_data( ).
 
   ENDMETHOD.
 
@@ -227,9 +245,24 @@ CLASS ZMA0_CL_SETAUT_STOCK_T_DATA IMPLEMENTATION.
 
   METHOD zma0_if_setaut_process~execute.
 
+    me->batch_inputs = me->create_batch_inputs( ).
+
     LOOP AT me->batch_inputs INTO DATA(lr_batch_input).
       lr_batch_input->call_transaction( ).
     ENDLOOP.
 
   ENDMETHOD.
+
+  METHOD get_reference_data.
+
+    re_reference_data = me->reference_data.
+
+  ENDMETHOD.
+
+  METHOD set_reference_data.
+
+    me->reference_data = im_reference_data.
+
+  ENDMETHOD.
+
 ENDCLASS.

@@ -4,6 +4,7 @@
   <asx:values>
    <AREAT>MM AUTOMATION FRONTEND STD</AREAT>
    <INCLUDES>
+    <SOBJ_NAME>LZMA0_SETAUT_STDCLS</SOBJ_NAME>
     <SOBJ_NAME>LZMA0_SETAUT_STDF01</SOBJ_NAME>
     <SOBJ_NAME>LZMA0_SETAUT_STDI01</SOBJ_NAME>
     <SOBJ_NAME>LZMA0_SETAUT_STDO01</SOBJ_NAME>
@@ -64,13 +65,22 @@
       <DESCRIPT>MM Automation Set Stock Transfer Data</DESCRIPT>
       <TYPE>N</TYPE>
       <NEXTSCREEN>0100</NEXTSCREEN>
-      <LINES>010</LINES>
-      <COLUMNS>124</COLUMNS>
+      <LINES>031</LINES>
+      <COLUMNS>135</COLUMNS>
      </HEADER>
      <CONTAINERS>
       <RPY_DYCATT>
        <TYPE>SCREEN</TYPE>
        <NAME>SCREEN</NAME>
+      </RPY_DYCATT>
+      <RPY_DYCATT>
+       <TYPE>CUST_CTRL</TYPE>
+       <NAME>CC_REFERENCE_DATA_STD</NAME>
+       <ELEMENT_OF>SCREEN</ELEMENT_OF>
+       <LINE>009</LINE>
+       <COLUMN>002</COLUMN>
+       <LENGTH>118</LENGTH>
+       <HEIGHT>015</HEIGHT>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
@@ -121,6 +131,25 @@
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>PUSH</TYPE>
+       <NAME>BT_FETCH</NAME>
+       <TEXT>Fetch_Data_______</TEXT>
+       <ICON_NAME>ICON_REFRESH</ICON_NAME>
+       <ICON_QINFO>Fetch_Reference_Data</ICON_QINFO>
+       <ICON_QSPEC>X</ICON_QSPEC>
+       <WITH_ICON>X</WITH_ICON>
+       <LINE>003</LINE>
+       <COLUMN>037</COLUMN>
+       <LENGTH>044</LENGTH>
+       <VISLENGTH>020</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <PUSH_FCODE>FETCH</PUSH_FCODE>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
        <NAME>TXT_NEW_PLANT</NAME>
        <TEXT>New_Plant_____________</TEXT>
@@ -156,7 +185,7 @@
        <TEXT>Skip_____________</TEXT>
        <ICON_NAME>ICON_SKIP</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
+       <LINE>025</LINE>
        <COLUMN>002</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
@@ -174,7 +203,7 @@
        <TEXT>Exit_____________</TEXT>
        <ICON_NAME>ICON_CANCEL</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
+       <LINE>025</LINE>
        <COLUMN>025</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
@@ -192,7 +221,7 @@
        <TEXT>Execute/Next_____</TEXT>
        <ICON_NAME>ICON_OKAY</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
+       <LINE>025</LINE>
        <COLUMN>048</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
@@ -220,6 +249,9 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>  MODULE status_0100.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE>  MODULE display_alv.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*</LINE>
