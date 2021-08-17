@@ -14,6 +14,10 @@ FUNCTION ZMA0_SETAUT_CREATION_PROFILE.
   wa_screen-0100-new_plant = im_new_plant.
   wa_screen-0100-request = im_request.
 
+  IF im_ref_plant IS NOT INITIAL.
+    PERFORM fetch_reference_data.
+  ENDIF.
+
   CALL SCREEN 0100.
 
   ex_action = zma0_cl_setaut_utils=>convert_action_to_status(

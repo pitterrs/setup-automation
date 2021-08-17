@@ -4,6 +4,7 @@
   <asx:values>
    <AREAT>FUNCTION GROUP FOR CREATION PROFILE</AREAT>
    <INCLUDES>
+    <SOBJ_NAME>LZMM_SETAUT_PSACLS</SOBJ_NAME>
     <SOBJ_NAME>LZMM_SETAUT_PSAF01</SOBJ_NAME>
     <SOBJ_NAME>LZMM_SETAUT_PSAI01</SOBJ_NAME>
     <SOBJ_NAME>LZMM_SETAUT_PSAI02</SOBJ_NAME>
@@ -67,13 +68,22 @@
       <DESCRIPT>Maint. Rel. Creation Profile for Sched. Agmt. w. Rel. Docu</DESCRIPT>
       <TYPE>N</TYPE>
       <NEXTSCREEN>0100</NEXTSCREEN>
-      <LINES>011</LINES>
-      <COLUMNS>127</COLUMNS>
+      <LINES>031</LINES>
+      <COLUMNS>133</COLUMNS>
      </HEADER>
      <CONTAINERS>
       <RPY_DYCATT>
        <TYPE>SCREEN</TYPE>
        <NAME>SCREEN</NAME>
+      </RPY_DYCATT>
+      <RPY_DYCATT>
+       <TYPE>CUST_CTRL</TYPE>
+       <NAME>CC_PSA_REFERENCE_DATA</NAME>
+       <ELEMENT_OF>SCREEN</ELEMENT_OF>
+       <LINE>009</LINE>
+       <COLUMN>002</COLUMN>
+       <LENGTH>118</LENGTH>
+       <HEIGHT>015</HEIGHT>
       </RPY_DYCATT>
      </CONTAINERS>
      <FIELDS>
@@ -124,6 +134,25 @@
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>PUSH</TYPE>
+       <NAME>BT_FETCH</NAME>
+       <TEXT>Fetch_Data_______</TEXT>
+       <ICON_NAME>ICON_REFRESH</ICON_NAME>
+       <ICON_QINFO>Fetch_Reference_Data</ICON_QINFO>
+       <ICON_QSPEC>X</ICON_QSPEC>
+       <WITH_ICON>X</WITH_ICON>
+       <LINE>003</LINE>
+       <COLUMN>036</COLUMN>
+       <LENGTH>044</LENGTH>
+       <VISLENGTH>020</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <PUSH_FCODE>FETCH</PUSH_FCODE>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
        <NAME>TXT_NEW_PLANT</NAME>
        <TEXT>New_Plant_____________</TEXT>
@@ -159,8 +188,8 @@
        <TEXT>Skip_____________</TEXT>
        <ICON_NAME>ICON_SKIP</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
-       <COLUMN>002</COLUMN>
+       <LINE>025</LINE>
+       <COLUMN>003</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -177,8 +206,8 @@
        <TEXT>Exit_____________</TEXT>
        <ICON_NAME>ICON_CANCEL</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
-       <COLUMN>026</COLUMN>
+       <LINE>025</LINE>
+       <COLUMN>027</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -195,8 +224,8 @@
        <TEXT>Execute/Next_____</TEXT>
        <ICON_NAME>ICON_OKAY</ICON_NAME>
        <WITH_ICON>X</WITH_ICON>
-       <LINE>009</LINE>
-       <COLUMN>050</COLUMN>
+       <LINE>025</LINE>
+       <COLUMN>051</COLUMN>
        <LENGTH>022</LENGTH>
        <VISLENGTH>020</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -223,6 +252,9 @@
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE> MODULE STATUS_0100.</LINE>
+      </RPY_DYFLOW>
+      <RPY_DYFLOW>
+       <LINE> MODULE display_alv.</LINE>
       </RPY_DYFLOW>
       <RPY_DYFLOW>
        <LINE>*</LINE>

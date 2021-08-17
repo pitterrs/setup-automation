@@ -14,3 +14,6 @@ TYPES: BEGIN OF ty_screen,
 
 DATA wa_screen TYPE ty_screen.
 DATA r_creation_profile TYPE REF TO zma0_cl_setaut_creation_prf.
+DATA t_reference_data TYPE
+zma0_cl_setaut_creation_prf=>tty_creation_prf.
+DATA r_psa_alv TYPE REF TO zma0_cl_salv_buddy.

@@ -16,6 +16,8 @@ MODULE user_command_0100 INPUT.
   CASE wa_screen-0100-action.
     WHEN 'EXE'.
       PERFORM execute_set_stock_t_data.
+    WHEN 'FETCH'.
+      PERFORM fetch_reference_data.
     WHEN OTHERS.
   ENDCASE.
 ENDMODULE.

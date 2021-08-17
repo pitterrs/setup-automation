@@ -5,7 +5,11 @@ CLASS zma0_cl_setaut_creation_prf DEFINITION
 
   PUBLIC SECTION.
 
+      TYPES: tty_creation_prf TYPE TABLE OF zma0v_setaut_psa
+           WITH DEFAULT KEY.
+
     INTERFACES zma0_if_setaut_process.
+
     METHODS get_ref_plant
       RETURNING VALUE(re_ref_plant) TYPE werks_d.
 
@@ -29,14 +33,21 @@ CLASS zma0_cl_setaut_creation_prf DEFINITION
                 VALUE(im_new_plant) TYPE werks_d
                 VALUE(im_request)   TYPE REF TO zma0_cl_setaut_request.
 
-    METHODS is_created
-      RETURNING VALUE(re_return) TYPE abap_bool.
-
     METHODS get_request
       RETURNING VALUE(re_request) TYPE REF TO zma0_cl_setaut_request .
 
     METHODS set_request
       IMPORTING VALUE(im_request) TYPE REF TO zma0_cl_setaut_request.
+
+    METHODS get_reference_data
+        RETURNING
+            VALUE(re_result)
+                TYPE zma0_cl_setaut_creation_prf=>tty_creation_prf.
+
+    METHODS set_reference_data
+        IMPORTING
+            VALUE(im_reference_data)
+                TYPE zma0_cl_setaut_creation_prf=>tty_creation_prf.
 
   PROTECTED SECTION.
 
@@ -48,6 +59,9 @@ CLASS zma0_cl_setaut_creation_prf DEFINITION
     DATA new_plant TYPE werks_d.
 
     DATA request TYPE REF TO zma0_cl_setaut_request.
+
+    DATA t_reference_data
+        TYPE zma0_cl_setaut_creation_prf=>tty_creation_prf.
 
 ENDCLASS.
 
@@ -79,41 +93,26 @@ CLASS zma0_cl_setaut_creation_prf IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD set_database.
+
     me->database ?= im_database.
 
   ENDMETHOD.
 
   METHOD constructor.
+
     me->set_ref_plant( im_ref_plant ).
     me->set_new_plant( im_new_plant ).
     me->set_request( im_request ).
 
     " Create DAO
-    DATA(lr_database) = NEW lcl_creation_profile_dao(
-        VALUE #(
-            (  sign = 'I' option = 'EQ' low = im_ref_plant )
-            (  sign = 'I' option = 'EQ' low = im_new_plant )
-        )
+    me->database = NEW lcl_creation_profile_dao(
+        im_new_plant = im_new_plant
+        im_ref_plant = im_ref_plant
      ).
 
-    me->set_database( lr_database ).
+     me->t_reference_data = me->get_reference_data( ).
 
   ENDMETHOD.
-
-  METHOD is_created.
-    DATA(lt_creation_profiles) =
-        FILTER lif_creation_profile=>tty_creation_profile(
-            me->database->get_rel_creation_profile( )
-            WHERE plant = me->get_new_plant( )
-        ).
-    IF lt_creation_profiles IS INITIAL.
-      re_return = abap_false.
-    ELSE.
-      re_return = abap_true.
-    ENDIF.
-
-  ENDMETHOD.
-
 
   METHOD get_request.
     re_request = me->request.
@@ -128,21 +127,38 @@ CLASS zma0_cl_setaut_creation_prf IMPLEMENTATION.
 
     DATA(lr_batch_input) = NEW lcl_batch_input( me->get_request( ) ).
 
-    DATA(lt_creation_profiles) =
-    FILTER lif_creation_profile=>tty_creation_profile(
-        me->database->get_rel_creation_profile( )
-        WHERE plant = me->get_ref_plant( )
-    ).
-
-    CHECK lt_creation_profiles IS NOT INITIAL.
+    CHECK t_reference_data IS NOT INITIAL.
 
     lr_batch_input->fill_bdcdata(
       EXPORTING
-        im_creation_profiles = lt_creation_profiles
-        im_new_plant         = me->get_new_plant(  )
+        im_reference_data = t_reference_data
+        im_new_plant      = me->get_new_plant(  )
     ).
 
     lr_batch_input->call_transaction(  ).
+
+  ENDMETHOD.
+
+  METHOD get_reference_data.
+
+  DATA(t_rel_creation_prof) = me->database->get_rel_creation_profile( ).
+
+    LOOP AT t_rel_creation_prof INTO DATA(w_rel_creation_prof).
+
+      CHECK NOT line_exists( t_rel_creation_prof[
+          werks   = me->new_plant
+          abueb = w_rel_creation_prof-abueb
+      ] ).
+
+      APPEND w_rel_creation_prof TO re_result.
+
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD set_reference_data.
+
+    me->t_reference_data = im_reference_data.
 
   ENDMETHOD.
 

@@ -4,9 +4,16 @@
 @AbapCatalog.compiler.CompareFilter: true
 @AbapCatalog.preserveKey: true
 define view ZMA0_CDS_SETAUT_PSA 
-as select from t163p
+with parameters
+p_werks: werks_d
+as select from t163p as a
+left outer join t163s as b
+on b.werks = a.werks
+and b.abueb = a.abueb
+and b.spras = 'E'
  {
-    mandt,
-    werks,
-    abueb
-}
+    a.mandt,
+    a.werks,
+    a.abueb,
+    b.abbez
+} where a.werks = $parameters.p_werks
